@@ -1,15 +1,21 @@
 #!/bin/bash -x
-#Calculate Daily Employee Wage
-isPresent=1
-randomCheck=$((RANDOM%2));
-if [ $isPresent -eq $randomCheck ]
+#adding part time employee wage
+isPartTime=1;
+isFullTime=2;
+empRatePerHour=20;
+randomCheck=$((RANDOM%3));
+
+if [ $isFullTime -eq $randomCheck ];
 then
-	empRatePerHour=20;
-	empDayHour=8;
-	salary=$(("$empRatePerHour*$empDayHour"));
+	empHour=8;
+elif [ $isPartTime -eq $randomCheck ];
+then
+	empHour=4;
 else
-	salary=0;
+	empHour=0;
 fi
-	echo "$salary"
+salary=$(( $empHour*$empRatePerHour ));
+
+
 
 
