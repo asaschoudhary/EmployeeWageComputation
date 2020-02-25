@@ -1,13 +1,15 @@
-#!/bin/bash
-#printing
-echo "We are printing employee is present or not"
-isPresent=$(($RANDOM%2))
-if((isPresent == 1))
+#!/bin/bash -x
+#Calculate Daily Employee Wage
+isPresent=1
+randomCheck=$((RANDOM%2));
+if [ $isPresent -eq $randomCheck ]
 then
-	echo "Employee is present"
+	empRatePerHour=20;
+	empDayHour=8;
+	salary=$(("$empRatePerHour*$empDayHour"));
 else
-	echo "Employee is not present"
+	salary=0;
 fi
-
+	echo "$salary"
 
 
