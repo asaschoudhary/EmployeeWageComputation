@@ -1,5 +1,5 @@
 #!/bin/bash -x
-printf "Added function to calculate daily wages and store it in array"
+printf "Added function to calculate daily wages and store it in dictionary"
 
 #CONSTANTS
 WAGEPERHOUR=20
@@ -14,7 +14,7 @@ wage=0
 monthlyWage=0
 day=1
 totalHoursWorked=0
-declare -a empDailyWage
+declare -A empDailyWage
 
 #FUNCTION TO GENERATE WORKING HOURS PER DAY
 function getWorkingHours()
@@ -48,9 +48,12 @@ do
 	random=$((RANDOM%3))
 	hoursPerDay="$( getWorkingHours $random )"
 	totalHoursWorked=$((totalHoursWorked+hoursPerDay))
-	empDailyWage[$day]="$( calculateDailyWage  $hoursPerDay)"
+	empDailyWage["$day"]="$( calculateDailyWage  $hoursPerDay)"
 	day=$((day+1))
 done
 monthlyWage="$( calculateDailyWage  $totalHoursWorked)"
 printf "Month wage: $monthlyWage\n"
-printf "Daily wage: " ${empDailyWage[@]}
+for day in ${!empDailyWage[@]}
+do
+	printf "$day : ${empDailyWage[$day]}  "
+done
